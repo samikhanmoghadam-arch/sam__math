@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d1d">
+  <title>SAM AI | دستیار هوشمند عمومی</title>
+  <link rel="stylesheet" href="sam-ai.css">
+  <script src="sam-ai.js" defer></script>
+</head>
+<body>
+  <div class="ai-stars" aria-hidden="true"><span>π</span><span>√x</span><span>∑</span><span>∞</span><span>△</span><span>x²</span></div>
+  <header class="ai-topbar">
+    <a class="ai-brand" href="index.html"><span class="ai-logo">Σ</span><span>SAM MATH <small> / SAM AI</small></span></a>
+    <div class="ai-header-actions"><button id="aiThemeBtn" class="ghost-btn theme-toggle" type="button" title="تغییر حالت روشن و تاریک" aria-label="تغییر حالت روشن و تاریک">◐ روشن / تاریک</button><a class="back-link" href="index.html">← بازگشت به سام‌مث</a></div>
+  </header>
+  <main class="ai-shell">
+    <section class="hero">
+      <div class="orb">✦</div>
+      <p class="eyebrow">YOUR GENERAL AI COMPANION</p>
+      <h1>سلام! من <span>SAM AI</span> هستم.</h1>
+      <p class="hero-copy">هر چیزی می‌خواهی بپرس؛ از برنامه‌نویسی و علم تا نوشتن، یادگیری و ایده‌های تازه.</p>
+      <div class="connection-pill"><i id="connectionDot"></i><span id="connectionText">آمادهٔ اتصال؛ برای پاسخ‌گویی اینترنت لازم است.</span></div>
+    </section>
+    <section class="chat-card" aria-label="گفت‌وگو با SAM AI">
+      <div class="chat-head"><div><strong>گفت‌وگو با SAM AI</strong><p>پاسخ روشن · تحلیل · برنامه‌نویسی · یادگیری و ایده‌پردازی</p></div><button id="clearChat" class="ghost-btn" type="button">گفت‌وگوی تازه ↺</button></div>
+      <div id="messages" class="messages" aria-live="polite">
+        <article class="message assistant"><div class="avatar">Σ</div><div class="bubble"><strong>SAM AI</strong><p>سلام دوست من! 😊 می‌تونم در برنامه‌نویسی، علوم، ریاضی، نوشتن، یادگیری و ایده‌پردازی کمکت کنم. دوست داری از کجا شروع کنیم؟</p></div></article>
+      </div>
+      <div class="suggestions" aria-label="سؤال‌های پیشنهادی">
+        <button type="button" class="suggestion" data-prompt="یک برنامهٔ سادهٔ پایتون بنویس و خط‌به‌خط توضیح بده.">برنامه‌نویسی توضیح</button>
+        <button type="button" class="suggestion" data-prompt="توضیح بده هوش مصنوعی چطور کار می‌کند؛ با مثال ساده.">هوش مصنوعی توضیح</button>
+        <button type="button" class="suggestion" data-prompt="یک پدیدهٔ عجیب علمی را توضیح بده و بگو چرا رخ می‌دهد.">دانستنی علمی</button>
+        <button type="button" class="suggestion" data-prompt="برای یادگیری یک موضوع سخت، یک برنامهٔ مرحله‌به‌مرحله پیشنهاد بده.">یادگیری و مطالعه</button>
+      </div>
+      <div class="web-search-bar" aria-label="تنظیمات جست‌وجوی وب">
+        <label class="web-toggle"><input id="webSearchToggle" type="checkbox"> <span>🌐 جست‌وجو در وب</span></label>
+        <label class="site-field"><span>فقط در این سایت (اختیاری):</span><input id="siteInput" type="text" dir="ltr" placeholder="example.com" maxlength="120" autocomplete="off"></label>
+      </div>
+      <form id="questionForm" class="composer">
+        <label class="sr-only" for="questionInput">پیام برای SAM AI</label>
+        <textarea id="questionInput" rows="2" maxlength="2000" placeholder="هر چیزی می‌خواهی از SAM AI بپرس… (حداکثر 2000 نویسه)"></textarea>
+        <input id="attachmentInput" class="sr-only" type="file" accept="image/*,.txt,.md,.csv,.json,.js,.py,.html,.css,.xml,.log" />
+        <div class="attachment-row">
+          <button id="attachButton" class="attach-btn" type="button" aria-label="انتخاب عکس یا فایل">＋  عکس یا فایل</button>
+          <span id="attachmentHint" class="attachment-hint"> (حداکثر ۵ مگابایت)</span>
+          <div id="attachmentPreview" class="attachment-preview" hidden>
+            <span id="attachmentName"></span>
+            <button id="removeAttachment" type="button" aria-label="حذف فایل انتخاب‌شده">×</button>
+          </div>
+        </div>
+        <div class="composer-bottom"><span id="charCount">۰ / 2000 </span><button id="sendButton" class="send-btn" type="submit"><span>ارسال پیام</span><span aria-hidden="true">➤</span></button></div>
+      </form>
+      <p id="statusMessage" class="status-message" role="status">SAM AI برای پاسخ‌گویی به اینترنت نیاز دارد؛ تاریخچه روی همین مرورگر ذخیره می‌شود. ابزارهای ریاضی SAM MATH جدا هستند.</p>
+    </section>
+    <p class="privacy-note">نکته: پرسش‌ها برای دریافت پاسخ به سرور آنلاین ارسال می‌شوند. تاریخچه در حافظهٔ همین مرورگر ذخیره می‌شود و با دکمهٔ «گفت‌وگوی تازه» پاک می‌شود؛ روی دستگاه دیگر خودکار همگام نمی‌شود. اطلاعات خصوصی یا رمز عبور نفرست. </p>
+  </main>
+  <footer> SAM MATH · یادگیری با کنجکاوی شروع می‌شود | ساخته شده توسط گروه سام</footer>
+</body>
+</html>

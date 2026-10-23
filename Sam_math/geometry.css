@@ -1,0 +1,433 @@
+
+* { box-sizing: border-box; }
+
+:root {
+  color-scheme: dark;
+  --bg: #080d19;
+  --panel: #10192b;
+  --panel2: #172238;
+  --border: #2a3851;
+  --text: #e6edf8;
+  --muted: #9aabc4;
+  --cyan: #67e8f9;
+  --purple: #a78bfa;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+button, input { font: inherit; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+button {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #1b2941;
+  color: var(--text);
+  padding: 9px 11px;
+  cursor: pointer;
+  transition: .15s ease;
+}
+
+button:hover {
+  border-color: var(--cyan);
+  background: #243650;
+}
+
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.topbar {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: #0e1627;
+}
+
+.brand {
+  color: var(--cyan);
+  font-weight: 900;
+  font-size: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand span {
+  color: var(--purple);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.top-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-link {
+  color: var(--cyan);
+  text-decoration: none;
+  padding: 8px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px;
+  min-height: calc(100vh - 68px);
+}
+
+.sidebar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  align-self: start;
+}
+
+.sidebar h2 {
+  font-size: 15px;
+  margin: 5px 0 12px;
+}
+
+.hint, .canvas-heading p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 0;
+}
+
+.tool-grid {
+  display: grid;
+  gap: 7px;
+}
+
+.tool {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+  min-height: 42px;
+}
+
+.tool > span { font-size: 12px; }
+
+.tool.active {
+  border-color: var(--cyan);
+  background: rgba(103, 232, 249, .13);
+  color: var(--cyan);
+}
+
+#commandForm {
+  display: grid;
+  gap: 9px;
+  margin: 14px 0;
+}
+
+#commandForm label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+#commandInput {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px;
+  background: #080f1e;
+  color: white;
+  direction: ltr;
+  text-align: left;
+}
+
+.primary {
+  color: #082f49;
+  background: var(--cyan);
+  border-color: var(--cyan);
+  font-weight: 800;
+}
+
+.primary:hover {
+  background: #a5f3fc;
+  color: #082f49;
+}
+
+.examples {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.examples button {
+  font-size: 11px;
+  padding: 9px 5px;
+}
+
+.properties {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+#propertiesText {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.tool-help, .status {
+  margin-top: 12px;
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--panel2);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.status { color: var(--cyan); }
+
+.drawing-area {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.canvas-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.canvas-heading h1 {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+.canvas-heading p { margin-bottom: 0; }
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.zoom-controls span {
+  min-width: 50px;
+  text-align: center;
+  color: var(--cyan);
+  font-size: 12px;
+}
+
+.canvas-shell {
+  position: relative;
+  flex: 1;
+  min-height: 570px;
+  overflow: hidden;
+  border: 1px solid #31415b;
+  border-radius: 16px;
+  background: #0b1221;
+  box-shadow: 0 18px 55px rgba(0,0,0,.22);
+}
+
+#geometryCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 570px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.canvas-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 0 5px;
+}
+
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: 1fr; }
+  .sidebar { order: 2; }
+  .drawing-area { order: 1; }
+  .canvas-shell, #geometryCanvas { min-height: 480px; }
+}
+
+@media (max-width: 520px) {
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .workspace { padding: 8px; }
+  .canvas-heading { align-items: flex-start; flex-direction: column; }
+  .canvas-shell, #geometryCanvas { min-height: 400px; }
+}
+
+/* ===== Geometry polish ===== */
+
+/* سایدبار موقع اسکرول ثابت می‌مونه */
+.sidebar {
+  position: sticky;
+  top: 14px;
+  max-height: calc(100vh - 28px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* دکمه‌های ابزار */
+.tool:hover { transform: translateX(-3px); }
+.tool.active { box-shadow: inset -3px 0 var(--cyan); }
+
+/* دکمهٔ پایان چندضلعی */
+#finishPolygonBtn {
+  border-style: dashed;
+  border-color: rgba(52, 211, 153, .5);
+  color: #34d399;
+}
+#finishPolygonBtn:hover {
+  border-color: #34d399;
+  background: rgba(52, 211, 153, .14);
+}
+
+/* دکمهٔ حذف */
+.tool.danger {
+  color: #fb7185;
+  border-color: rgba(251, 113, 133, .4);
+}
+.tool.danger:hover {
+  border-color: #fb7185;
+  background: rgba(251, 113, 133, .12);
+}
+
+/* مثال‌های سریع */
+.examples button:hover { color: var(--cyan); }
+
+/* کارت اطلاعات شکل */
+.properties {
+  padding: 12px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+#propertiesText b { color: var(--cyan); }
+
+/* نقطهٔ سبز کنار وضعیت */
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-inline-end: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, .6);
+}
+
+/* بوم */
+.canvas-shell {
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, .22),
+    inset 0 0 0 1px rgba(103, 232, 249, .06);
+}
+.zoom-controls button { min-width: 38px; }
+
+/* موبایل: سایدبار از حالت چسبیده درمیاد */
+@media (max-width: 900px) {
+  .sidebar { position: static; max-height: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool:hover { transform: none; }
+}
+
+/* ===== ابزارهای تازه ===== */
+.tool.special {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, .45);
+}
+.tool.special:hover {
+  border-color: #fbbf24;
+  background: rgba(251, 191, 36, .12);
+}
+
+.snap {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel2);
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+.snap input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--cyan);
+  cursor: pointer;
+}
+.snap:has(input:checked) {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+
+/* ===== SAM MATH animated math universe background ===== */
+body{position:relative;isolation:isolate;overflow-x:hidden}
+.math-universe{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;user-select:none;background:radial-gradient(ellipse at 12% 20%,rgba(124,58,237,.13),transparent 34%),radial-gradient(ellipse at 88% 75%,rgba(6,182,212,.10),transparent 34%),radial-gradient(ellipse at 50% 110%,rgba(59,130,246,.08),transparent 40%)}
+.math-universe:before{content:"";position:absolute;inset:0;opacity:.19;background-image:linear-gradient(rgba(148,163,184,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.09) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 80%,transparent)}
+.universe-glow{position:absolute;width:28vw;height:28vw;min-width:220px;min-height:220px;border-radius:50%;filter:blur(60px);opacity:.15;animation:glow-breathe 10s ease-in-out infinite alternate}
+.glow-one{top:8%;left:-7%;background:#8b5cf6}.glow-two{right:-8%;bottom:4%;background:#06b6d4;animation-delay:-5s}
+.math-drift{position:absolute;font-weight:800;color:#a5b4fc;opacity:.23;text-shadow:0 0 24px rgba(103,232,249,.3);animation:math-float 12s ease-in-out infinite;white-space:nowrap}
+.drift-a{top:16%;left:20%;font-size:clamp(24px,3vw,46px);animation-delay:-2s}.drift-b{top:37%;right:13%;font-size:clamp(19px,2.4vw,34px);color:#67e8f9;animation-delay:-7s}
+.drift-c{top:65%;left:17%;font-size:clamp(30px,4vw,54px);animation-delay:-4s}.drift-d{top:24%;right:35%;font-size:clamp(16px,2vw,27px);animation-delay:-8s}
+.drift-e{bottom:16%;right:24%;font-size:clamp(34px,4vw,58px);color:#c4b5fd;animation-delay:-3s}.drift-f{bottom:30%;left:39%;font-size:clamp(14px,1.8vw,24px);animation-delay:-6s}
+.drift-g{top:48%;left:7%;font-size:34px;color:#6ee7b7;animation-delay:-9s}.drift-h{top:11%;right:14%;font-size:36px;animation-delay:-1s}
+.drift-i{bottom:12%;left:47%;font-size:42px;color:#67e8f9;animation-delay:-5s}.drift-j{top:77%;right:8%;font-size:24px;animation-delay:-10s}
+.scholar{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;width:136px;padding:13px 10px 11px;border:1px solid rgba(167,139,250,.22);border-radius:22px;background:linear-gradient(145deg,rgba(30,41,75,.45),rgba(13,22,43,.22));box-shadow:0 12px 38px rgba(0,0,0,.08),inset 0 1px rgba(255,255,255,.04);backdrop-filter:blur(3px);animation:scholar-hover 7s ease-in-out infinite}
+.scholar-art{display:grid;place-items:center;width:58px;height:58px;border-radius:20px;background:linear-gradient(145deg,rgba(167,139,250,.18),rgba(103,232,249,.12));font-size:33px;filter:drop-shadow(0 4px 12px rgba(103,232,249,.14))}
+.scholar-name{font-size:13px;font-weight:900;color:#e0e7ff}.scholar-note{font-size:9px;color:#9caac7;white-space:nowrap}
+.scholar-khayyam{left:2.5%;top:22%;animation-delay:-2s}.scholar-newton{right:2.5%;top:40%;animation-delay:-4.5s}.scholar-einstein{left:4%;bottom:8%;animation-delay:-1s}
+.orbit{position:absolute;border:1px solid rgba(103,232,249,.10);border-radius:50%;transform:rotate(-24deg);animation:orbit-drift 22s linear infinite}
+.orbit-one{width:38vw;height:13vw;left:30%;top:38%}.orbit-two{width:24vw;height:8vw;left:42%;top:44%;border-color:rgba(167,139,250,.12);animation-direction:reverse;animation-duration:30s}
+.topbar,.layout,.workspace{position:relative;z-index:1}
+@keyframes math-float{0%,100%{transform:translate3d(0,0,0) rotate(-4deg)}50%{transform:translate3d(12px,-20px,0) rotate(5deg)}}
+@keyframes scholar-hover{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+@keyframes glow-breathe{from{transform:scale(.88);opacity:.09}to{transform:scale(1.14);opacity:.2}}
+@keyframes orbit-drift{from{transform:rotate(-24deg)}to{transform:rotate(336deg)}}
+@media(max-width:900px){.scholar{opacity:.72}.scholar-khayyam{left:-17px;top:17%}.scholar-newton{right:-17px;top:48%}.scholar-einstein{left:-17px;bottom:5%}.math-drift{opacity:.15}.orbit{opacity:.45}}
+@media(max-width:520px){.scholar{width:95px;padding:8px 5px;border-radius:16px}.scholar-art{width:42px;height:42px;font-size:25px;border-radius:14px}.scholar-note{font-size:7px}.scholar-khayyam{top:19%}.scholar-newton{top:54%}.scholar-einstein{bottom:3%}.drift-d,.drift-f,.drift-j{display:none}}
+@media(prefers-reduced-motion:reduce){.math-drift,.scholar,.universe-glow,.orbit{animation:none!important}}
+
+
+/* SAM MATH: illustrated Khayyam sticker */
+.scholar-khayyam .scholar-art{width:94px;height:88px;overflow:hidden;padding:0;border-radius:18px;background:rgba(9,13,29,.25);border:1px solid rgba(167,139,250,.28);}
+.scholar-khayyam .scholar-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center 45%;border-radius:inherit;filter:drop-shadow(0 4px 12px rgba(103,232,249,.18));}
+@media(max-width:520px){.scholar-khayyam .scholar-art{width:70px;height:66px;}}

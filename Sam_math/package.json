@@ -1,0 +1,44 @@
+{
+  "name": "sam-math-desktop",
+  "version": "1.0.0",
+  "description": "SAM MATH desktop application",
+  "main": "electron-main.cjs",
+  "author": "SAM MATH",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "build:portable": "electron-builder --win portable",
+    "build:installer": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.sammath.desktop",
+    "productName": "SAM MATH",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "**/*",
+      "!release/**",
+      "!node_modules/.cache/**",
+      "!.wrangler/**",
+      "!cloudflare-sam-ai/.wrangler/**"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "artifactName": "SAM-MATH-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAM MATH | Geometry Studio</title>
+  <link rel="stylesheet" href="geometry.css">
+</head>
+<body>
+
+<div class="math-universe" aria-hidden="true">
+  <div class="universe-glow glow-one"></div><div class="universe-glow glow-two"></div>
+  <div class="math-drift drift-a">π</div><div class="math-drift drift-b">√x</div>
+  <div class="math-drift drift-c">∑</div><div class="math-drift drift-d">x² + y²</div>
+  <div class="math-drift drift-e">∞</div><div class="math-drift drift-f">a² + b²</div>
+  <div class="math-drift drift-g">÷</div><div class="math-drift drift-h">∫</div>
+  <div class="math-drift drift-i">△</div><div class="math-drift drift-j">123</div>
+  <div class="scholar scholar-khayyam"><span class="scholar-art"><img class="scholar-image" src="khayyam-cartoon.png" alt="تصویر کارتونی خیام زیر درخت"></span><span class="scholar-name">خیام</span><span class="scholar-note">عمر خیام · جبر و هندسه</span></div>
+  <div class="scholar scholar-newton"><span class="scholar-art">🍎</span><span class="scholar-name">نیوتن</span><span class="scholar-note">قانون‌های طبیعت</span></div>
+  <div class="scholar scholar-einstein"><span class="scholar-art">🧠</span><span class="scholar-name">انیشتین</span><span class="scholar-note">ایده‌های بزرگ</span></div>
+  <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+</div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">SAM MATH <span>GEOMETRY</span></a>
+    <div class="top-actions">
+      <button id="undoBtn">↶ بازگشت</button>
+      <button id="clearBtn">پاک‌کردن بوم</button>
+      <button id="pngBtn">ذخیرهٔ تصویر</button>
+      <button id="saveBtn">ذخیرهٔ فایل</button>
+      <a class="back-link" href="index.html">بازگشت به خانه ↩</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="sidebar">
+      <h2>ابزارهای رسم</h2>
+      <p class="hint">ابزار را انتخاب کن و روی بوم کار کن.</p>
+
+      <div class="tool-grid">
+        <button class="tool active" data-tool="select">↖ <span>انتخاب و جابه‌جایی</span></button>
+        <button class="tool" data-tool="point">• <span>نقطه</span></button>
+        <button class="tool" data-tool="segment">／ <span>پاره‌خط</span></button>
+        <button class="tool" data-tool="line">↔ <span>خط</span></button>
+        <button class="tool" data-tool="circle">◯ <span>دایره</span></button>
+        <button class="tool" data-tool="polygon">△ <span>چندضلعی</span></button>
+        <button class="tool" data-tool="angle">∠ <span>اندازه‌گیری زاویه</span></button>
+        <button class="tool" data-tool="midpoint">⌖ <span>نقطهٔ وسط</span></button>
+        <button class="tool" data-tool="perp">⟂ <span>عمودمنصف</span></button>
+        <button class="tool" data-tool="bisector">⋖ <span>نیمساز زاویه</span></button>
+        <button class="tool" id="finishPolygonBtn">✓ <span>پایان چندضلعی</span></button>
+        <button class="tool special" id="centersBtn">✦ <span>مراکز مثلث + خط اویلر</span></button>
+        <button class="tool danger" id="deleteBtn">🗑 <span>حذف انتخاب‌شده</span></button>
+        <button class="tool danger" id="clearAllBtn">🧹 <span>پاک‌کردن همه شکل‌ها</span></button>
+      </div>
+
+      <label class="snap">
+        <input type="checkbox" id="snapToggle">
+        <span>چسبیدن به نقاط شبکه (عددهای صحیح)</span>
+      </label>
+
+      <h2>ساخت با اندازه</h2>
+      <form id="commandForm">
+        <label for="commandInput">دستور یا شکل دلخواه</label>
+        <input id="commandInput" placeholder="مثلاً segment 13">
+        <button class="primary" type="submit">ساخت شکل</button>
+      </form>
+
+      <div class="examples">
+        <button data-command="segment 13">پاره‌خط ۱۳ واحدی</button>
+        <button data-command="circle 5">دایره با شعاع ۵</button>
+        <button data-command="triangle">مثلث نمونه</button>
+        <button data-command="rectangle 8 5">مستطیل ۸ × ۵</button>
+        <button data-command="point 3 4">نقطهٔ (۳، ۴)</button>
+        <button data-command="regular 6 3">شش‌ضلعی منتظم</button>
+        <button data-command="pythagoras 3 4">قضیهٔ فیثاغورس</button>
+      </div>
+
+      <div class="properties">
+        <h2>اطلاعات شکل</h2>
+        <div id="propertiesText">هنوز شکلی انتخاب نشده است.</div>
+      </div>
+
+      <div class="tool-help" id="helpText">
+        نقطه‌ای را انتخاب کن و آن را بکش تا جابه‌جا شود.
+      </div>
+      <div class="status" id="status" role="status">آمادهٔ رسم</div>
+    </aside>
+
+    <section class="drawing-area">
+      <div class="canvas-heading">
+        <div>
+          <h1>بوم هندسه</h1>
+          <p>صفحهٔ مستقل رسم، اندازه‌گیری و ساخت شکل</p>
+        </div>
+        <div class="zoom-controls">
+          <button id="zoomOut">−</button>
+          <span id="zoomValue">100%</span>
+          <button id="zoomIn">+</button>
+          <button id="fitBtn">مرکزکردن</button>
+        </div>
+      </div>
+
+      <div class="canvas-shell" id="canvasShell">
+        <canvas id="geometryCanvas"></canvas>
+      </div>
+      <footer class="canvas-footer">
+        <span id="coordinates">x: 0 · y: 0</span>
+        <span>واحدها روی شبکهٔ مختصات</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="geometry.js"></script>
+</body>
+</html>
